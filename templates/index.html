@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Penjualan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+        }
+        
+        h1,
+        h2 {
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        form {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        input[type="text"],
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            flex: 1;
+        }
+        
+        button {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Manajemen Stok Penjualan</h1>
+
+        <!-- Form Tambah Produk -->
+        <h2>Tambah Produk Baru</h2>
+        <form action="/tambah" method="POST">
+            <input type="text" name="nama_produk" placeholder="Nama Produk" required>
+            <input type="number" name="harga" placeholder="Harga (Rp)" required>
+            <input type="number" name="stok" placeholder="Jumlah Stok" required>
+            <button type="submit">Tambah</button>
+        </form>
+
+        <!-- Tabel Daftar Produk -->
+        <h2>Daftar Produk</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Produk</th>
+                    <th>Harga (Rp)</th>
+                    <th>Stok</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in produk %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.nama_produk }}</td>
+                    <td>{{ "{:,.0f}".format(p.harga) }}</td>
+                    <td>{{ p.stok }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td> colspan="4" style="text-align: center;">Belum ada data produk.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
